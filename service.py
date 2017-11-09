@@ -4,17 +4,13 @@ import algorithm
 
 routes = web.RouteTableDef()
 
-@routes.get('/jieba/cut')
+@routes.get('/docsim')
 @utils.render_json
-async def handle_jieba_cut(req):
-  sent = req.query.get('sentence', 'hello world')
-  return algorithm.jieba.lcut(sent)
-
-@routes.get('/jieba/tfidf')
-@utils.render_json
-async def handle_jieba_tfidf(req):
-  sent = req.query.get('sentence', 'hello world')
-  return algorithm.jieba.analyse.extract_tags(sent, withWeight=True)
+async def handle_docsim(req):
+  a = req.query.get('a', '')
+  b = req.query.get('b', '')
+  model = req.query.get('model', 'default')
+  return algorithm.docsim.docsim(a, b, model=model)
 
 
 app = web.Application()
