@@ -1,4 +1,5 @@
 from aiohttp import web
+import logging
 import utils
 import algorithm
 
@@ -16,6 +17,11 @@ async def handle_docsim(req):
 app = web.Application()
 app.router.add_routes(routes)
 
-web.run_app(app)
+logger = logging.getLogger("NLP")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
+app.make_handler(access_log=logger)
+
+web.run_app(app, port=8080, access_log=logger)
 
 
