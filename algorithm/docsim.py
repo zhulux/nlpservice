@@ -24,5 +24,5 @@ def doc_to_vec(doc, model):
 
 @lru_cache(maxsize=1024)
 def vec_sim(a, b):
-  intersection = set(a.keys()) & set(b.keys())
+  intersection = frozenset(a.keys()) & frozenset(b.keys())
   return sum([a[k] * b[k] for k in intersection])
