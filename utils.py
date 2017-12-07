@@ -1,18 +1,18 @@
-from aiohttp import web
+import traceback
 
 def render_json(func):
-  async def func_wrapper(req):
+  def func_wrapper(*args, **kwargs):
     try:
-      result = await func(req)
-      return web.json_response({
+      result = func(*args, **kwargs)
+      return {
         'status': 'ok',
         'result': result
-      })
+      }
     except Exception as e:
-      return web.json_response({
+      return {
         'status': 'error',
-        'error': str(e)
-      })
-      
-  return func_wrapper
+        'error': str(e),
+        'details': traceback.format_exc().split('\n')
+      }
 
+  return func_wrapper

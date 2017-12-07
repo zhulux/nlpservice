@@ -1,31 +1,25 @@
-from aiohttp import web
 import logging
 import utils
 import algorithm
+import bottle
+from bottle import get, post, route, run, request
 
-routes = web.RouteTableDef()
+bottle.BaseRequest.MEMFILE_MAX = 1024 * 1024 # 1MB max req size
 
-@routes.get('/docsim')
+@get('/docsim')
 @utils.render_json
-async def handle_docsim(req):
-  a = req.query.get('a', '')
-  b = req.query.get('b', '')
-  model = req.query.get('model', 'default')
+def handle_docsim():
+  query = request.query.decode()
+  a = query.a or ''
+  b = query.b or ''
+  model = query.model or 'default'
   return algorithm.docsim.docsim(a, b, model=model)
 
-@routes.post('/docsim_1ton')
+@post('/docsim_1ton')
 @utils.render_json
-async def handle_docsim_1ton(req):
-  json = await req.json()
+def handle_docsim_1ton():
+  json = request.json
   model = json['model']
   return algorithm.docsim.docsim_1ton(json['one'], json['many'], model=model)
 
-app = web.Application()
-app.router.add_routes(routes)
-
-logger = logging.getLogger("NLP")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
-app.make_handler(access_log=logger)
-
-web.run_app(app, port=8080, access_log=logger)
+run(reloader=True)
