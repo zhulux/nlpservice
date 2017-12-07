@@ -2,6 +2,7 @@ import logging
 import utils
 import algorithm
 import bottle
+import os
 from bottle import get, post, route, run, request
 
 bottle.BaseRequest.MEMFILE_MAX = 1024 * 1024 # 1MB max req size
@@ -22,4 +23,7 @@ def handle_docsim_1ton():
   model = json['model']
   return algorithm.docsim.docsim_1ton(json['one'], json['many'], model=model)
 
-run(reloader=True)
+if os.getenv('environment') == 'development':
+  run(reloader=True, debug=True)
+else:
+  run(host='0.0.0.0', server='paste')
