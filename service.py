@@ -26,4 +26,13 @@ def handle_docsim_1ton():
 if os.getenv('environment') == 'development':
   run(reloader=True, debug=True)
 else:
-  run(host='0.0.0.0', server='paste')
+  from raven import Client
+  from raven.contrib.bottle import Sentry
+  app = bottle.app()
+  app.catchall = False
+
+  client = Client('http://ebf87dc6f4b046e88aa7a8918714fbf2:cb7455e5ef8d4caf9664a13813f87030@sentry.zhaoalpha.com/8')
+  app = Sentry(app, client)
+
+  run(app=app, host='0.0.0.0', server='paste')
+
