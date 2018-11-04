@@ -11,8 +11,8 @@ bottle.BaseRequest.MEMFILE_MAX = 1024 * 1024 # 1MB max req size
 @utils.render_json
 def handle_docsim():
   query = request.query.decode()
-  a = query.a or ''
-  b = query.b or ''
+  a = query.a
+  b = query.b
   model = query.model or 'default'
   return algorithm.docsim.docsim(a, b, model=model)
 
@@ -23,7 +23,7 @@ def handle_docsim_1ton():
   model = json['model']
   return algorithm.docsim.docsim_1ton(json['one'], json['many'], model=model)
 
-if os.getenv('environment') == 'development':
+if os.getenv('ENVIRONMENT') == 'development':
   run(reloader=True, debug=True)
 else:
   from raven import Client
