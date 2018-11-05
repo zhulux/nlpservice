@@ -59,7 +59,7 @@ def confidence(outputs, threshold):
 
   diff = outputs - goals
 
-  positive = stddev(diff[outputs >= threshold])
+  positive = stddev(diff[outputs >= threshold]) or 0.0
   overall = stddev(diff)
 
   return positive, overall
