@@ -55,11 +55,13 @@ def confidence(outputs, threshold):
   goals[outputs <  threshold] = 0.0
 
   def stddev(ary):
+    if ary is None or len(ary) == 0:
+      return 0.0
     return 1 - 2 * np.sqrt(np.mean(np.square(ary)))
 
   diff = outputs - goals
 
-  positive = stddev(diff[outputs >= threshold]) or 0.0
+  positive = stddev(diff[outputs >= threshold])
   overall = stddev(diff)
 
   return positive, overall
