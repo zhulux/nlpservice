@@ -52,7 +52,7 @@ else:
   app = bottle.app()
   app.catchall = False
 
-  client = Client('http://ebf87dc6f4b046e88aa7a8918714fbf2:cb7455e5ef8d4caf9664a13813f87030@sentry.zhaoalpha.com/8')
+  client = Client('https://64c2673c7ad847408f53f23ff60484c3:91512851ab5345f6b4698f1a2fa01b4a@sentry.astarup.com/12')
   app = Sentry(app, client)
 
   run(app=app, host='0.0.0.0', server='paste')
