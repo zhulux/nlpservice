@@ -20,7 +20,7 @@ def handle_docsim():
 @utils.render_json
 def handle_docsim_1ton():
   json = request.json
-  model = json['model']
+  model = json['model'] or 'default'
   return algorithm.docsim.docsim_1ton(json['one'], json['many'], model=model)
 
 @get('/ner')

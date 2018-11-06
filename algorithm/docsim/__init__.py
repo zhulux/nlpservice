@@ -20,3 +20,4 @@ def tfidf(sent, model='default'):
 
 
 from .docsim import docsim
+from .docsim import docsim_1ton
