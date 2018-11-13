@@ -39,7 +39,7 @@ Request parameters:
 
 - `q`: the sentence
 - `threshold` (float [0,1]):, default to be 0.5, indicating how high probability should take for a single character be considered in a part of the entity name. higher value corresponds to lower false positive rate, while lower value corresponds to lower false negative rate.
-- `return_raw` (1 or 0, optional): whether return a list of probability of each character being a part of the entity name
+- `return_raw` (true or false, optional): whether return a list of probability of each character being a part of the entity name
 
 Response (JSON):
 
