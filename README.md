@@ -45,7 +45,7 @@ Response (JSON):
 
 - `entity` (a string or null): representing the entity extracted
 - `threshold`: same as the value passed in
-- `positive_confidence` (float [0,1], or null): how confident the algorithm feels about the entity found; if no entity is found, this field will be null
-- `overall_confidence` (float [0,1]): how confidence the algorithm feels about all the character been classified correctly
+- `positive_confidence` (float [0,1], or null): how confident the algorithm determined that the entity found is correct; if no entity is found, this field will be null
+- `overall_confidence` (float [0,1]): how confident the algorithm determined that all the character been classified correctly
 - `raw` (list of pairs): only present when requested with `return_raw`; each pair contains a character and the probability for that character being a part of the entity name
 
