@@ -37,7 +37,7 @@ the corresponding text from many.
 
 Request parameters:
 
-- `q`: the content of the sentence
+- `q`: the sentence
 - `threshold` (float [0,1]):, default to be 0.5, indicating how high probability should take for a single character be considered in a part of the entity name. higher value corresponds to lower false positive rate, while lower value corresponds to lower false negative rate.
 - `return_raw` (1 or 0, optional): whether return a list of probability of each character being a part of the entity name
 
@@ -45,7 +45,7 @@ Response (JSON):
 
 - `entity` (a string or null): representing the entity extracted
 - `threshold`: same as the value passed in
-- `positive_confidence` (float [0,1], or null): how confident the algorithm feels about the entity found, if no entity is found, this will always be null
+- `positive_confidence` (float [0,1], or null): how confident the algorithm feels about the entity found; if no entity is found, this field will be null
 - `overall_confidence` (float [0,1]): how confidence the algorithm feels about all the character been classified correctly
 - `raw` (list of pairs): only present when requested with `return_raw`; each pair contains a character and the probability for that character being a part of the entity name
 
