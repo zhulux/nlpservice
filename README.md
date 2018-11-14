@@ -33,7 +33,7 @@ the corresponding text from many.
 
 --
 
-`POST /ner`: Extract a entity name (usually a company) from a sentence (usually a news title)
+`POST /ner`: Extract an entity name (usually a company) from a sentence (usually a news title)
 
 Request parameters:
 
